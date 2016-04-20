@@ -534,7 +534,7 @@ public class TestRunner extends BaseTestRunner implements TestRunContext {
 			JOptionPane.showMessageDialog(fFrame, "No Test Cases found.\nCheck that the configured \'TestCollector\' is supported on this platform.");
 			return;
 		}
-		selector.show();
+		selector.setVisible(true);
 		String className= selector.getSelectedItem();
 		if (className != null)
 			setSuite(className);
@@ -844,6 +844,6 @@ public class TestRunner extends BaseTestRunner implements TestRunContext {
 
 	private void about() {
 		AboutDialog about= new AboutDialog(fFrame);
-		about.show();
+		about.setVisible(true);
 	}
 }
