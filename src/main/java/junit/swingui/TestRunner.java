@@ -58,9 +58,12 @@ import junit.framework.TestResult;
 import junit.framework.TestSuite;
 import junit.runner.BaseTestRunner;
 import junit.runner.FailureDetailView;
+import junit.runner.ReloadingTestSuiteLoader;
 import junit.runner.SimpleTestCollector;
+import junit.runner.StandardTestSuiteLoader;
 import junit.runner.TestCollector;
 import junit.runner.TestRunListener;
+import junit.runner.TestSuiteLoader;
 import junit.runner.Version;
 
 /**
@@ -845,5 +848,30 @@ public class TestRunner extends BaseTestRunner implements TestRunContext {
 	private void about() {
 		AboutDialog about= new AboutDialog(fFrame);
 		about.setVisible(true);
+	}
+
+	// moved from the old BaseTestRunner
+
+	/**
+	 * Returns the loader to be used.
+	 */
+	public TestSuiteLoader getLoader() {
+		if (useReloadingTestSuiteLoader())
+			return new ReloadingTestSuiteLoader();
+		return new StandardTestSuiteLoader();
+	}
+
+ 	public static boolean inVAJava() {
+		try {
+			Class.forName("com.ibm.uvm.tools.DebugSupport");
+		}
+		catch (Exception e) {
+			return false;
+		}
+		return true;
+	}
+
+	public static boolean inMac() {
+		return System.getProperty("mrj.version") != null;
 	}
 }

@@ -13,7 +13,7 @@ repositories {
 }
 
 dependencies {
-	compile 'junit:junit:3.8.2'
+	compile 'junit:junit:4.12'
 }
 
 eclipse {
